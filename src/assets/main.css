@@ -1,0 +1,6 @@
+@import url("./base.css");
+
+.main-header-app,
+.main-footer-app {
+	padding: 10px 50px;
+}
