@@ -11,7 +11,7 @@
 			>
 				По вашему запросу ничего не найдено.
 			</div>
-			<AboutProductCard
+			<ProductCard
 				v-else
 				v-for="(item, key) in filtersItems"
 				:key="key"
@@ -28,7 +28,7 @@
 </template>
 <script setup>
 import { ref, onMounted, computed } from "vue";
-import AboutProductCard from "@/components/products/AboutProductCard.vue";
+import ProductCard from "@/components/products/ProductCard.vue";
 import { useBasketStore } from "@/stores/basket";
 import { useInformationStore } from "@/stores/infomations";
 import { useBaseStore } from "@/stores/index";

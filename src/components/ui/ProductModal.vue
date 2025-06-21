@@ -66,6 +66,7 @@ function close() {
 	align-items: center;
 	justify-content: center;
 	align-content: center;
+	margin-top: 10px;
 }
 .product-modal__close {
 	margin-left: auto;

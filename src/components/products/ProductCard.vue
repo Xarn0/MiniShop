@@ -1,55 +1,113 @@
 <template>
-	<div class="product-card">
-		<div class="product-card__title">{{ props.title }}</div>
-		<div class="product-card__image-wrapper">
-			<img
-				:src="currentImage"
-				@error="onImagesError"
-				alt=""
-				class="product-card__image"
-			/>
+	<div class="about-product-card">
+		<template v-if="close">
+			<span class="about-product-card__close" @click="$emit('delete', id)"
+				><img
+					class="about-product-card__close--img"
+					:src="crossSmaill"
+					alt="" /></span
+		></template>
+		<div class="about-product-card__img--wrap">
+			<img :src="img[0]" alt="" class="about-product-card__img" />
 		</div>
+		<h4 class="about-product-card__title">
+			{{ title }}
+		</h4>
+		<div class="about-product-card__rating">
+			{{ rating }}/5.00 <Rating :rating="rating" />
+		</div>
+		<p class="about-product-card__price">Цена: {{ price }}$</p>
+		<button class="about-product-card__button" @click="$emit('select', item)">
+			{{ actionText }}
+		</button>
 	</div>
 </template>
-
 <script setup>
-import { ref } from "vue";
-import defaultImage from "@/assets/images/images.jpeg";
+import Rating from "@/components/ui/Rating.vue";
+import crossSmaill from "@/components/icons/cross-small.svg";
 const props = defineProps({
 	title: {
 		type: String,
-		default: 1
+		required: true
 	},
-	url: {
+	rating: {
+		type: Number
+	},
+	price: {
+		type: Number
+	},
+	img: {
+		type: Array
+	},
+	item: {
+		type: Object
+	},
+	id: {
+		type: Number
+	},
+	close: {
+		type: Boolean,
+		default: false
+	},
+	actionText: {
 		type: String,
-		default: defaultImage
+		default: "Добавить в корзину"
 	}
 });
-const currentImage = ref(props.url);
-function onImagesError() {
-	currentImage.value = defaultImage;
-}
 </script>
-
 <style scoped>
-.product-card {
-	border: 1px solid #049;
-	/* width: 150px; */
-	/* height: 150px; */
-	background-color: #048;
-	color: #fff;
-	opacity: 0.6;
+.about-product-card {
+	position: relative;
+	padding: 20px;
+	border: 2px solid #046;
+	border-radius: inherit;
 	cursor: pointer;
-	transition: opacity 0.3s ease-in-out;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-template-rows: 40px 100px;
+	gap: 20px;
+	box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.2);
 }
-.product-card__image-wrapper {
-	width: 300px;
+.about-product-card__img--wrap {
+	grid-area: span 3 / 1;
+	width: 200px;
 }
-.product-card__image {
+.about-product-card__img {
+	width: 100%;
+}
+.about-product-card__title {
+	font-size: 30px;
+}
+.about-product-card__rating,
+.about-product-card__price {
+	align-self: center;
+}
+.about-product-card__button {
+	align-self: center;
+	grid-area: 4 / span 2;
+	border: none;
+	padding: 10px;
+	background-color: #00cc6a;
+	font-size: 18px;
+	color: #fff;
+	border-radius: inherit;
+	cursor: pointer;
+}
+.about-product-card__close {
+	position: absolute;
+	right: 10px;
+	top: 5px;
+	width: 30px;
+	height: 30px;
+}
+.about-product-card__close--img {
 	max-width: 100%;
-	object-fit: cover;
+	object-fit: contain;
 }
-.product-card:hover {
-	opacity: 1;
+.about-product-card__rating {
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+	gap: 10px;
 }
 </style>

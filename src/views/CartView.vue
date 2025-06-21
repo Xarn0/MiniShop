@@ -9,7 +9,7 @@
 			</div>
 			<div class="basket-view__title">Корзина {{ basket.getCountItems }}</div>
 			<div class="basket-view__products">
-				<AboutProductCard
+				<ProductCard
 					v-for="(item, key) in basket.getItems"
 					:key="key"
 					:title="item.title"
@@ -56,7 +56,7 @@
 </style>
 <script setup>
 import { ref } from "vue";
-import AboutProductCard from "@/components/products/AboutProductCard.vue";
+import ProductCard from "@/components/products/ProductCard.vue";
 import ProductModal from "@/components/ui/ProductModal.vue";
 import { useBasketStore } from "@/stores/basket";
 const basket = useBasketStore();
