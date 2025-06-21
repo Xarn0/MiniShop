@@ -13,9 +13,10 @@
 		<h4 class="about-product-card__title">
 			{{ title }}
 		</h4>
-		<p class="about-product-card__rating">rating:{{ rating }}/5.00</p>
-		<Rating :rating="rating" />
-		<p class="about-product-card__price">Price:{{ price }}$</p>
+		<div class="about-product-card__rating">
+			{{ rating }}/5.00 <Rating :rating="rating" />
+		</div>
+		<p class="about-product-card__price">Price: {{ price }}$</p>
 		<button class="about-product-card__button" @click="$emit('select', item)">
 			{{ actionText }}
 		</button>
@@ -58,13 +59,14 @@ const props = defineProps({
 .about-product-card {
 	position: relative;
 	padding: 20px;
-	border: 10px solid #046;
+	border: 2px solid #046;
 	border-radius: inherit;
 	cursor: pointer;
 	display: grid;
 	grid-template-columns: 1fr 2fr;
-	grid-template-rows: 100px;
+	grid-template-rows: 40px 100px;
 	gap: 20px;
+	box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.2);
 }
 .about-product-card__img--wrap {
 	grid-area: span 3 / 1;
@@ -82,11 +84,12 @@ const props = defineProps({
 }
 .about-product-card__button {
 	align-self: center;
-	grid-area: 4 / 2;
+	grid-area: 4 / span 2;
 	border: none;
 	padding: 10px;
-	background-color: rgb(57, 228, 57);
+	background-color: #00cc6a;
 	font-size: 18px;
+	color: #fff;
 	border-radius: inherit;
 	cursor: pointer;
 }
@@ -100,5 +103,11 @@ const props = defineProps({
 .about-product-card__close--img {
 	max-width: 100%;
 	object-fit: contain;
+}
+.about-product-card__rating {
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+	gap: 10px;
 }
 </style>

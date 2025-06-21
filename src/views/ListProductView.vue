@@ -1,9 +1,18 @@
 <template>
 	<div class="list-product-view">
-		<h1 class="list-product-view__title">Список Продуктов</h1>
+		<h1 class="list-product-view__title">
+			Список Продуктов ({{ filtersItems.length }})
+		</h1>
 		<div class="list-product-view__products">
 			<div class="" v-if="spinner">Загрузка...</div>
+			<div
+				v-else-if="filtersItems.length === 0"
+				class="list-product-view__empty"
+			>
+				По вашему запросу ничего не найдено.
+			</div>
 			<AboutProductCard
+				v-else
 				v-for="(item, key) in filtersItems"
 				:key="key"
 				:title="item.title"
@@ -65,5 +74,11 @@ function getIdProduct(item) {
 .list-product-view__title {
 	text-align: center;
 	margin: 20px 0;
+}
+.list-product-view__empty {
+	text-align: center;
+	font-size: 30px;
+	width: 100%;
+	grid-area: span 2 / span 3;
 }
 </style>

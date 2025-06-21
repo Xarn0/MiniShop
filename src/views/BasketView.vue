@@ -19,9 +19,17 @@
 					:id="item.id"
 					:actionText="'Купить'"
 					:close="true"
+					:item="item"
+					@select="openModal"
 					@delete="deleteElementInBasket"
-				/></div
-		></template>
+				/>
+			</div>
+			<ProductModal
+				v-if="selectedProduct"
+				:product="selectedProduct"
+				@close="closeModal"
+			/>
+		</template>
 	</div>
 </template>
 <style scoped>
@@ -47,11 +55,23 @@
 }
 </style>
 <script setup>
+import { ref } from "vue";
 import AboutProductCard from "@/components/products/AboutProductCard.vue";
+import ProductModal from "@/components/ui/ProductModal.vue";
 import { useBasketStore } from "@/stores/basket";
 const basket = useBasketStore();
+const selectedProduct = ref(null);
 
 function deleteElementInBasket(id) {
 	basket.removeElementItems(id);
+}
+
+function openModal(item) {
+	selectedProduct.value = item;
+	document.querySelector("body").style.overflow = "hidden";
+}
+function closeModal() {
+	selectedProduct.value = null;
+	document.querySelector("body").style.overflow = "auto";
 }
 </script>

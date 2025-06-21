@@ -1,7 +1,7 @@
 <template>
 	<component
 		:is="tag"
-		class="select-category"
+		:class="['select-category', $attrs.class]"
 		@click="$emit('sel', props.name)"
 	>
 		<RouterLink class="select-category__link" :to="mypath">{{

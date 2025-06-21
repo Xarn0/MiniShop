@@ -2,20 +2,22 @@
 	<header class="main-header-app">
 		<div class="main-header-app__top">
 			<Logo class="main-header-app__logo" />
-			<SearchInput />
-			<Basket />
+			<SelectCategory
+				:tag="'div'"
+				class="main-header-app__cat"
+				:mypath="`/list-products`"
+				:name="`Список продуктов`"
+			></SelectCategory>
+			<div class="main-header-app__icons">
+				<SearchInput />
+				<Basket />
+			</div>
 		</div>
-		<div class="main-header-app__bottom">
+		<!-- <div class="main-header-app__bottom">
 			<nav class="main-header-app__navigator">
-				<ul class="main-header-app__nav-list">
-					<SelectCategory :mypath="`/`" :name="`Главная`" />
-					<SelectCategory
-						:mypath="`/list-products`"
-						:name="`Список продуктов`"
-					></SelectCategory>
-				</ul>
+				<ul class="main-header-app__nav-list"></ul>
 			</nav>
-		</div>
+		</div> -->
 	</header>
 </template>
 <script setup>
@@ -28,18 +30,30 @@ import Basket from "@/components/ui/Basket.vue";
 .main-header-app {
 	display: flex;
 	justify-content: space-between;
-	/* align-items: center; */
+	background-color: #049;
 	flex-direction: column;
 	color: #fff;
-	background-color: #049;
 }
+
 .main-header-app__top {
 	align-items: center;
 	display: flex;
 	justify-content: flex-end;
 }
 .main-header-app__logo {
-	margin-right: auto;
+	/* margin-right: auto; */
+	flex: 1;
+}
+.main-header-app__cat {
+	width: 200px;
+	display: block;
+	flex: 3;
+	align-self: center;
+	display: flex;
+	justify-content: center;
+}
+.main-header-app__icons {
+	display: flex;
 }
 .main-header-app__bottom {
 	align-self: center;

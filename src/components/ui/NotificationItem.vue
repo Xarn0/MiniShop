@@ -15,7 +15,7 @@ const props = defineProps({
 <style>
 .information-alert {
 	width: 250px;
-	background: #2ecc71;
+	background: #00cc6a;
 	color: #fff;
 	text-align: center;
 	margin-top: 10px;
