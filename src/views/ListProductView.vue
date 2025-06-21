@@ -4,7 +4,7 @@
 		<div class="list-product-view__products">
 			<div class="" v-if="spinner">Загрузка...</div>
 			<AboutProductCard
-				v-for="(item, key) in items"
+				v-for="(item, key) in filtersItems"
 				:key="key"
 				:title="item.title"
 				:rating="item.rating"
@@ -14,33 +14,40 @@
 				@select="getIdProduct"
 			/>
 		</div>
-		<!-- <p>{{ items }}</p> -->
+		<!-- <p>{{ base.getItems }}</p> -->
 	</div>
 </template>
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import AboutProductCard from "@/components/products/AboutProductCard.vue";
 import { useBasketStore } from "@/stores/basket";
 import { useInformationStore } from "@/stores/infomations";
+import { useBaseStore } from "@/stores/index";
 const basket = useBasketStore();
 const infomations = useInformationStore();
+const base = useBaseStore();
 
 let items = ref([]);
 let spinner = ref(true);
 
 onMounted(async () => {
 	try {
-		let response = await fetch("https://dummyjson.com/products");
-		if (!response.ok) throw new Error(`Status:${response.status}`);
-		let data = await response.json();
-		items.value = data.products.slice(0, 10);
-		spinner.value = false;
-		console.log(items.value);
+		await base.setItems();
 	} catch (error) {
+		console.error("Ошибка загрузки продуктов:", error);
 	} finally {
 		spinner.value = false;
 	}
 });
+
+const filtersItems = computed(() =>
+	base.getItems.filter((item) =>
+		item.title.toLowerCase().includes(base.getSearchQuery.toLowerCase())
+	)
+);
+
+// base.setItems();
+// onMounted();
 function getIdProduct(item) {
 	let result = basket.addItem(item);
 	infomations.showInformation(result);

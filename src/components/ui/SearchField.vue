@@ -4,11 +4,7 @@
 		<button class="search-field__button">Поиск</button>
 	</div>
 </template>
-<script setup>
-function searchFunc(e) {
-	console.log(e.target.value);
-}
-</script>
+
 <style scoped>
 .search-field {
 	padding: 10px;
@@ -30,3 +26,10 @@ function searchFunc(e) {
 	cursor: pointer;
 }
 </style>
+<script setup>
+import { useBaseStore } from "@/stores";
+const base = useBaseStore();
+function searchFunc(e) {
+	base.setSearchQuery(e.target.value.trim());
+}
+</script>
