@@ -1,19 +1,20 @@
 <template>
-	<div class="list-product-view">
-		<h1 class="list-product-view__title">
+	<div class="product-list-view">
+		<h1 class="product-list-view__title">
 			Список Продуктов ({{ filtersItems.length }})
 		</h1>
-		<div class="list-product-view__products">
+		<div class="product-list-view__products">
 			<div class="" v-if="spinner">Загрузка...</div>
 			<div
 				v-else-if="filtersItems.length === 0"
-				class="list-product-view__empty"
+				class="product-list-view__empty"
 			>
 				По вашему запросу ничего не найдено.
 			</div>
+
 			<ProductCard
 				v-else
-				v-for="(item, key) in filtersItems"
+				v-for="(item, key) in paginatorStore.getPageItems"
 				:key="key"
 				:title="item.title"
 				:rating="item.rating"
@@ -23,6 +24,7 @@
 				@select="getIdProduct"
 			/>
 		</div>
+		<PaginationCard />
 		<!-- <p>{{ base.getItems }}</p> -->
 	</div>
 </template>
@@ -32,6 +34,9 @@ import ProductCard from "@/components/products/ProductCard.vue";
 import { useBasketStore } from "@/stores/basket";
 import { useInformationStore } from "@/stores/infomations";
 import { useBaseStore } from "@/stores/index";
+import { usePaginatorStore } from "@/stores/paginator";
+import PaginationCard from "@/components/ui/PaginationCard.vue";
+const paginatorStore = usePaginatorStore();
 const basket = useBasketStore();
 const infomations = useInformationStore();
 const base = useBaseStore();
@@ -42,6 +47,7 @@ let spinner = ref(true);
 onMounted(async () => {
 	try {
 		await base.setItems();
+		paginatorStore.setData(base.getItems, 4);
 	} catch (error) {
 		console.error("Ошибка загрузки продуктов:", error);
 	} finally {
@@ -64,18 +70,19 @@ function getIdProduct(item) {
 </script>
 
 <style>
-.list-product-view__products {
+.product-list-view__products {
 	margin-top: 20px;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, 1fr);
 	gap: 10px;
 	border-radius: 25px;
 }
-.list-product-view__title {
+.product-list-view__title {
 	text-align: center;
 	margin: 20px 0;
 }
-.list-product-view__empty {
+.product-list-view__empty {
 	text-align: center;
 	font-size: 30px;
 	width: 100%;

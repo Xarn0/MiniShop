@@ -8,10 +8,12 @@ export const useBaseStore = defineStore("base", {
 	actions: {
 		async setItems() {
 			try {
+				let count = 0;
 				let response = await fetch("https://dummyjson.com/products");
 				if (!response.ok) throw new Error(`Status:${response.status}`);
 				let data = await response.json();
-				this.items = data.products.slice(0, 10);
+
+				this.items = data.products;
 			} catch (error) {}
 		},
 		setSearchQuery(str) {
