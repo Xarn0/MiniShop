@@ -4,7 +4,7 @@ export const useInformationStore = defineStore("information", {
 	state: () => {
 		return {
 			list: [],
-			isOpenNavigationDrawer: true
+			isOpenNavigationDrawer: false
 		};
 	},
 	actions: {
