@@ -29,7 +29,7 @@
 	</div>
 </template>
 <script setup>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, watch } from "vue";
 import ProductCard from "@/components/products/ProductCard.vue";
 import { useBasketStore } from "@/stores/basket";
 import { useInformationStore } from "@/stores/infomations";
@@ -44,6 +44,16 @@ const base = useBaseStore();
 let items = ref([]);
 let spinner = ref(true);
 
+const filtersItems = computed(() => base.filtersItems);
+
+watch(
+	filtersItems,
+	(newFilteredItems) => {
+		paginatorStore.setData(newFilteredItems, 4);
+	},
+	{ immediate: true }
+);
+
 onMounted(async () => {
 	try {
 		await base.setItems();
@@ -54,12 +64,6 @@ onMounted(async () => {
 		spinner.value = false;
 	}
 });
-
-const filtersItems = computed(() =>
-	base.getItems.filter((item) =>
-		item.title.toLowerCase().includes(base.getSearchQuery.toLowerCase())
-	)
-);
 
 // base.setItems();
 // onMounted();

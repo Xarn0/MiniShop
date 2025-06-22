@@ -29,6 +29,11 @@ export const useBaseStore = defineStore("base", {
 		},
 		getSearchQuery: (state) => {
 			return state.searchQuery;
+		},
+		filtersItems() {
+			return this.items.filter((item) =>
+				item.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+			);
 		}
 	}
 });
