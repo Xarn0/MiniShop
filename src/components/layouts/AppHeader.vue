@@ -8,22 +8,19 @@
 				:mypath="`/list-products`"
 				:name="`Список продуктов`"
 			></SelectCategory>
-			<div class="main-header-app__icons">
+			<div class="main-header-app__actions">
 				<SearchInput />
 				<Basket />
+				<Burger />
 			</div>
 		</div>
-		<!-- <div class="main-header-app__bottom">
-			<nav class="main-header-app__navigator">
-				<ul class="main-header-app__nav-list"></ul>
-			</nav>
-		</div> -->
 	</header>
 </template>
 <script setup>
 import Logo from "@/components/ui/Logo.vue";
 import SearchInput from "@/components/ui/SearchField.vue";
 import SelectCategory from "@/components/ui/SelectCategory.vue";
+import Burger from "@/components/ui/Burger.vue";
 import Basket from "@/components/ui/Basket.vue";
 </script>
 <style scoped>
@@ -52,8 +49,10 @@ import Basket from "@/components/ui/Basket.vue";
 	display: flex;
 	justify-content: center;
 }
-.main-header-app__icons {
+.main-header-app__actions {
 	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 .main-header-app__bottom {
 	align-self: center;
@@ -62,5 +61,23 @@ import Basket from "@/components/ui/Basket.vue";
 	display: flex;
 	list-style-type: none;
 	gap: 15px;
+}
+@media (max-width: 1024px) {
+	.main-header-app__logo {
+		flex: 0;
+		flex-basis: 100px;
+	}
+
+	.search-field {
+		display: none;
+	}
+}
+@media (max-width: 768px) {
+	.main-header-app__cat {
+		display: none;
+	}
+	.main-header-app__logo {
+		margin-right: auto;
+	}
 }
 </style>

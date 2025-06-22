@@ -1,7 +1,10 @@
 <template>
 	<div class="search-field">
 		<input @input="searchFunc" type="text" class="search-field__input" />
-		<RouterLink to="/list-products" class="search-field__button"
+		<RouterLink
+			to="/list-products"
+			class="search-field__button"
+			@click="info.controlNavigationDrawer()"
 			>Поиск</RouterLink
 		>
 	</div>
@@ -38,9 +41,11 @@
 }
 </style>
 <script setup>
+import { useInformationStore } from "@/stores/infomations";
 import { RouterLink } from "vue-router";
 import { useBaseStore } from "@/stores";
 const base = useBaseStore();
+const info = useInformationStore();
 function searchFunc(e) {
 	base.setSearchQuery(e.target.value.trim());
 }

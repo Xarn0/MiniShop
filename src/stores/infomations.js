@@ -3,7 +3,8 @@ let idCounter = 0;
 export const useInformationStore = defineStore("information", {
 	state: () => {
 		return {
-			list: []
+			list: [],
+			isOpenNavigationDrawer: true
 		};
 	},
 	actions: {
@@ -16,6 +17,11 @@ export const useInformationStore = defineStore("information", {
 		},
 		remove(id) {
 			this.list = this.list.filter((item) => item.id !== id);
+		},
+		controlNavigationDrawer(bool = false) {
+			if (typeof bool !== "boolean") return;
+
+			this.isOpenNavigationDrawer = bool;
 		}
 	}
 });

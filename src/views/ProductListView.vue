@@ -92,4 +92,22 @@ function getIdProduct(item) {
 	width: 100%;
 	grid-area: span 2 / span 3;
 }
+@media (max-width: 1220px) {
+	.product-list-view__products {
+		/* grid-template-columns: 450px 450px; */
+		justify-content: center;
+	}
+}
+
+@media (max-width: 768px) {
+	.product-list-view__products {
+		grid-template-columns: 1fr;
+		padding: 0 10px;
+	}
+}
+@media (max-width: 500px) {
+	.product-list-view__title {
+		font-size: 20px;
+	}
+}
 </style>

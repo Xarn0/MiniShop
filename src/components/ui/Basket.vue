@@ -10,7 +10,6 @@
 .basket {
 	width: 30px;
 	height: 30px;
-	margin-left: 30px;
 	align-self: center;
 	position: relative;
 }
@@ -36,6 +35,17 @@
 .router-link-active {
 	font-weight: 600;
 	color: #ffcc00;
+}
+@media (max-width: 768px) {
+	.basket {
+		width: 25px;
+		height: 25px;
+	}
+	.basket__circle {
+		width: 12px;
+		height: 12px;
+		font-size: 10px;
+	}
 }
 </style>
 

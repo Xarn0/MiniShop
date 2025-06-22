@@ -4,3 +4,9 @@
 .main-footer-app {
 	padding: 10px 50px;
 }
+@media (max-width: 500px) {
+	.main-header-app,
+	.main-footer-app {
+		padding: 10px;
+	}
+}

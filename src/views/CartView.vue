@@ -1,14 +1,12 @@
 <template>
-	<div class="basket-view">
-		<p class="basket-view__empty" v-if="!basket.getItems.length">
-			Корзина пуста
-		</p>
+	<div class="cart-view">
+		<p class="cart-view__empty" v-if="!basket.getItems.length">Корзина пуста</p>
 		<template v-else>
-			<div class="basket-view__total">
+			<div class="cart-view__total">
 				Итого: {{ basket.getCountSum.toFixed(2) }}$
 			</div>
-			<div class="basket-view__title">Корзина {{ basket.getCountItems }}</div>
-			<div class="basket-view__products">
+			<div class="cart-view__title">Корзина {{ basket.getCountItems }}</div>
+			<div class="cart-view__products">
 				<ProductCard
 					v-for="(item, key) in basket.getItems"
 					:key="key"
@@ -33,25 +31,31 @@
 	</div>
 </template>
 <style scoped>
-.basket-view__products {
+.cart-view__products {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 10px;
 	border-radius: 20px;
+	padding: 10px;
 }
-.basket-view__title {
+.cart-view__title {
 	font-size: 30px;
 	text-align: center;
 	margin: 20px 0;
 }
-.basket-view__total {
+.cart-view__total {
 	font-size: 35px;
 	text-align: center;
 	margin-top: 20px;
 }
-.basket-view__empty {
+.cart-view__empty {
 	font-size: 30px;
 	text-align: center;
+}
+@media (max-width: 768px) {
+	.cart-view__products {
+		grid-template-columns: 1fr;
+	}
 }
 </style>
 <script setup>
