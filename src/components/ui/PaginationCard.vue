@@ -1,5 +1,5 @@
 <template>
-	<div class="pagination-card">
+	<div class="pagination-card" v-if="paginationStore.totalPages">
 		<div
 			class="pagination-card__button pagination-card__button--prev"
 			@click="paginationStore.setPage(paginationStore.currentPage - 1)"
